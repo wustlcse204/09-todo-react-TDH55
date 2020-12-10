@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import './App.css';
 import Todo from './Todo.js';
+import NewTodo from './NewTodo';
 
 
 
@@ -17,6 +18,7 @@ export default function App() {
               <div id="todo-list-wrapper">
                   <ul id="todo-list-ul">
                     <Todo />
+                    <NewTodo />
                   </ul>
               </div>
           </div>
