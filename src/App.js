@@ -1,4 +1,4 @@
-import React, { Component, Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import './App.css';
 import Todo from './Todo.js';
 import NewTodo from './NewTodo';
@@ -11,6 +11,7 @@ export default function App() {
 
   const [todos, setTodos] = useState([])
 
+  console.log(todos)
   useEffect(() => {
     //api call
     const apiKey = "c4113f-42d6e9-f6658d-929da1-0a9677"
@@ -46,7 +47,7 @@ export default function App() {
                       <Todo key={todo.id} text={todo.text} completed={todo.completed} />
                     ))}
                     {/* <Todo text="New" completed="true"/> */}
-                    <NewTodo />
+                    <NewTodo todos={todos} onSubmit={setTodos}/>
                   </ul>
               </div>
           </div>
