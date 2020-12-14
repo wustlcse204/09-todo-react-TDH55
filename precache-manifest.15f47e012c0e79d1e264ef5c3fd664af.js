@@ -16,7 +16,7 @@ self.__precacheManifest = [
     "url": "/09-todo-react-TDH55/static/js/runtime~main.f5007bee.js"
   },
   {
-    "revision": "06782eebafc121c86a2de94605e1bfba",
+    "revision": "3e2fc7e9e19d349d3ea22759d18e3b5b",
     "url": "/09-todo-react-TDH55/index.html"
   }
 ];
