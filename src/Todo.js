@@ -5,18 +5,32 @@ import './Todo.css';
 
 export default function Todo({text, completed, updateList, todos, todoIndex, id}) {
     const [isCompleted, setCompleted] = useState(completed)
-    const removeTodo = () => {
-      //TODO: remove from api
-    }
+    const apiKey = "c4113f-42d6e9-f6658d-929da1-0a9677"
+
 
     const toggleComplete = () => {
       //TODO: update api
-      setCompleted(!isCompleted)
+        const xhttpToggle = new XMLHttpRequest()
+        const data = {
+          completed: !isCompleted
+        }
+        xhttpToggle.onreadystatechange = function() {
+          if(this.readyState === 4 && this.status === 200){
+              //success
+              //update ui
+              setCompleted(isCompleted => !isCompleted)
+          }else if (this.readyState === 4){
+              console.log(this.responseText)
+          }
+      }
+
+      xhttpToggle.open("PUT", "https://cse204.work/todos/" + id, true)
+      xhttpToggle.setRequestHeader("Content-type", "application/json");
+      xhttpToggle.setRequestHeader("x-api-key", apiKey)
+      xhttpToggle.send(JSON.stringify(data))
     }
 
     const deleteTodo = (event) => {
-      const apiKey = "c4113f-42d6e9-f6658d-929da1-0a9677"
-      console.log(id)
       // const dataTag = event.target.parentElement
       // const todoID = dataTag.value
       const xhttp = new XMLHttpRequest()
@@ -26,7 +40,6 @@ export default function Todo({text, completed, updateList, todos, todoIndex, id}
           if(this.readyState === 4 && this.status === 200){ //successfully deleted todo
               //remove element from ui
               todos.splice(todoIndex, 1)
-              console.log(todos)
               updateList([])
           }else if(this.readyState === 4){
               //error deleting
