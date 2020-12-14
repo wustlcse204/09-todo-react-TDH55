@@ -41,6 +41,7 @@ export default function Todo({text, completed, updateList, todos, todoIndex, id}
               //remove element from ui
               todos.splice(todoIndex, 1)
               updateList([])
+              updateList(todos)
           }else if(this.readyState === 4){
               //error deleting
               console.log(this.responseText)

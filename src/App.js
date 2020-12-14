@@ -10,6 +10,9 @@ import NewTodo from './NewTodo';
 export default function App() {
 
   const [todos, setTodos] = useState([])
+  const [sortBy, setSortBy] = useState("created")
+
+  console.log(todos)
 
   useEffect(() => {
     //api call
@@ -29,13 +32,106 @@ export default function App() {
     xhttp.send()
   }, [])
 
-  
+  //TODO: try to call this on new elements/edited elements
+  useEffect(() => {
+    console.log(sortBy)
+    const parameters = {
+      newestFirst: "created_at",
+      oldestFirst: "created_at",
+      az: "text",
+      za: "text",
+      completedFirst: "completed",
+      incompleteFirst: "completed",
+    }
+
+    const sortParameter = parameters[sortBy]
+    console.log(todos)
+    switch(sortBy){
+      case "newestFirst":{
+        console.log("newest")
+        const sorted = [...todos].sort((a, b) => {
+          return a[sortParameter].toLowerCase().localeCompare(b[sortParameter].toLowerCase())
+        }).reverse
+        // console.log(sorted)
+        setTodos(sorted)
+        break;
+      }
+      case "oldestFirst":{
+        console.log("oldest")
+        const sorted = [...todos].sort((a, b) => {
+          return a[sortParameter].toLowerCase().localeCompare(b[sortParameter].toLowerCase())
+        })
+        setTodos(sorted)
+        break;
+      }
+      case "az":{
+        console.log("az")
+        const sorted = [...todos].sort((a, b) => {
+          return a[sortParameter].toLowerCase().localeCompare(b[sortParameter].toLowerCase())
+        })
+        setTodos(sorted)
+        break;
+      }
+      case "za":{
+        console.log("za")
+        const sorted = [...todos].sort((a, b) => {
+          return a[sortParameter].toLowerCase().localeCompare(b[sortParameter].toLowerCase())
+        }).reverse()
+        setTodos(sorted)
+        break;
+      }
+      case "completedFirst":{
+        console.log("completed")
+        const sorted = [...todos].sort((a, b) => {
+          return (a[sortParameter] === b[sortParameter]) ? 0 : a[sortParameter]? -1 : 1
+        })
+        setTodos(sorted)
+        break;
+      }
+      case "incompleteFirst":{
+        console.log("incomplete")
+        const sorted = [...todos].sort((a, b) => {
+          return (a[sortParameter] === b[sortParameter]) ? 0 : a[sortParameter]? -1 : 1
+        }).reverse()
+        setTodos(sorted)
+        break;
+      }
+      default: {
+        console.log("default")
+        const sorted = [...todos].sort((a, b) => {
+          return a[sortParameter].toLowerCase().localeCompare(b[sortParameter].toLowerCase())
+        }).reverse()
+        setTodos(sorted)
+        break;
+      }
+    }
+  }, [sortBy])
+
+  const change = (e) => {
+    setSortBy(e.target.value)
+  }
+
+  //TODO: functionns for sort? use a callback on todos change and switch for sort method?
+
+  // sortTodos()
 
   return (
     <Fragment>
       <nav id="header-nav">
         <div className="content-wrapper" id="header-content-wrapper">
             <h1 id="header-title" className="text title">TODO List App</h1>
+            {/* TODO: style this and add ascending/descending */}
+            {/* TODO: change values */}
+            <select name="sort_by" id="sort-input" onChange={change}>
+              <option value="newestFirst">Newest First</option>
+              <option value="oldestFirst">Oldest First</option>
+
+              {/* <option value="updated">Updated</option> */}
+              <option value="az">A-Z</option>
+              <option value="za">Z-A</option>
+              <option value="completedFirst">Completed First</option>
+              <option value="incompleteFirst">Incomplete First</option>
+            </select>
         </div>
       </nav>
       <main id="main-section">

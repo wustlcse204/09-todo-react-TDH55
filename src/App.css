@@ -4,6 +4,10 @@
     margin: auto;
 }
 
+#header-content-wrapper{
+    text-align: center;
+}
+
 #header-nav{
     position: fixed;
     top: 0;
@@ -22,6 +26,7 @@
 
 #header-title{
     text-align: center;
+    display: inline;
 }
 
 
@@ -60,4 +65,9 @@
 .far:hover{
     color: gray;
     cursor: pointer;
+}
+
+#sort-input{
+    float: right;
+    display: inline;
 }
