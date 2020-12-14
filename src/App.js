@@ -5,8 +5,6 @@ import NewTodo from './NewTodo';
 
 
 
-//sorting -> use a state hook for sorting?
-
 export default function App() {
 
   const [todos, setTodos] = useState([])
@@ -46,6 +44,7 @@ export default function App() {
 
     const sortParameter = parameters[sortBy]
     console.log(todos)
+    // TODO: try calling this same switch in the settodos hook
     switch(sortBy){
       case "newestFirst":{
         console.log("newest")
@@ -111,22 +110,16 @@ export default function App() {
     setSortBy(e.target.value)
   }
 
-  //TODO: functionns for sort? use a callback on todos change and switch for sort method?
-
-  // sortTodos()
 
   return (
     <Fragment>
       <nav id="header-nav">
         <div className="content-wrapper" id="header-content-wrapper">
             <h1 id="header-title" className="text title">TODO List App</h1>
-            {/* TODO: style this and add ascending/descending */}
-            {/* TODO: change values */}
+            {/* TODO: style this */}
             <select name="sort_by" id="sort-input" onChange={change}>
               <option value="newestFirst">Newest First</option>
               <option value="oldestFirst">Oldest First</option>
-
-              {/* <option value="updated">Updated</option> */}
               <option value="az">A-Z</option>
               <option value="za">Z-A</option>
               <option value="completedFirst">Completed First</option>
@@ -138,11 +131,9 @@ export default function App() {
         <div className="content-wrapper" id="main-content-wrapper">
               <div id="todo-list-wrapper">
                   <ul id="todo-list-ul">
-                    {/* TODO: iterate over todos and add TODO */}
                     {todos.map((todo, todoNumber)=> (
                       <Todo key={todo.id} text={todo.text} completed={todo.completed} updateList={setTodos} todos={todos} todoIndex={todoNumber} id={todo.id} />
                     ))}
-                    {/* <Todo text="New" completed="true"/> */}
                     <NewTodo todos={todos} onSubmit={setTodos}/>
                   </ul>
               </div>
@@ -151,6 +142,3 @@ export default function App() {
     </Fragment> 
   )
 }
-
-
-// export default App;
