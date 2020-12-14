@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './NewTodo.css';
-import Todo from './Todo.js'
 
 export default function NewTodo({todos, onSubmit}) {
     const[title, setTitle] = useState("")
@@ -8,12 +7,10 @@ export default function NewTodo({todos, onSubmit}) {
     const handleTitleInput = (event) => {
         setTitle(event.target.value)
     }
-    console.log(todos)
     const handleSubmit = (e) =>{
         e.preventDefault()
         // onSubmit([])
         // make api request
-        console.log("submit")
         const apiKey = "c4113f-42d6e9-f6658d-929da1-0a9677"
         const data = {
             text: title
@@ -26,7 +23,6 @@ export default function NewTodo({todos, onSubmit}) {
                 const todo = JSON.parse(this.responseText);
                 // add to ui
                 setTitle("")
-                console.log(todos)
                 todos.push(todo)
                 //I dont know why this fixed it but it did
                 onSubmit([])
@@ -46,10 +42,10 @@ export default function NewTodo({todos, onSubmit}) {
 
     return (
         <div id="new-todo-wrapper">
-            <form id="new-todo-form" class="text" onSubmit={handleSubmit}>
-                <label for="title-input" hidden></label>
+            <form id="new-todo-form" className="text" onSubmit={handleSubmit}>
+                <label htmlFor="title-input" hidden></label>
                 <input type="text" id="title-input" name="title-input" value={title} placeholder="Title" onChange={handleTitleInput} />
-                <label for="submit-button" hidden></label>
+                <label htmlFor="submit-button" hidden></label>
                 <input type="submit" id="submit-button" name="submit-button" value="Submit" />
             </form>
         </div>

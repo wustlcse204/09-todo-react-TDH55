@@ -11,7 +11,6 @@ export default function App() {
 
   const [todos, setTodos] = useState([])
 
-  console.log(todos)
   useEffect(() => {
     //api call
     const apiKey = "c4113f-42d6e9-f6658d-929da1-0a9677"
@@ -22,7 +21,6 @@ export default function App() {
             //get todos from the response
             let todoResponse = JSON.parse(this.responseText)
             //add todos to the page
-            console.log(todoResponse)
             setTodos(todoResponse)
         }
     }
@@ -31,20 +29,22 @@ export default function App() {
     xhttp.send()
   }, [])
 
+  
+
   return (
     <Fragment>
       <nav id="header-nav">
-        <div class="content-wrapper" id="header-content-wrapper">
-            <h1 id="header-title" class="text title">TODO List App</h1>
+        <div className="content-wrapper" id="header-content-wrapper">
+            <h1 id="header-title" className="text title">TODO List App</h1>
         </div>
       </nav>
       <main id="main-section">
-        <div class="content-wrapper" id="main-content-wrapper">
+        <div className="content-wrapper" id="main-content-wrapper">
               <div id="todo-list-wrapper">
                   <ul id="todo-list-ul">
                     {/* TODO: iterate over todos and add TODO */}
-                    {todos.map(todo=> (
-                      <Todo key={todo.id} text={todo.text} completed={todo.completed} />
+                    {todos.map((todo, todoNumber)=> (
+                      <Todo key={todo.id} text={todo.text} completed={todo.completed} updateList={setTodos} todos={todos} todoIndex={todoNumber} id={todo.id} />
                     ))}
                     {/* <Todo text="New" completed="true"/> */}
                     <NewTodo todos={todos} onSubmit={setTodos}/>
