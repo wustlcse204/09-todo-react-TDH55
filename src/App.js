@@ -118,12 +118,12 @@ export default function App() {
             <h1 id="header-title" className="text title">TODO List App</h1>
             {/* TODO: style this */}
             <select name="sort_by" id="sort-input" onChange={change}>
-              <option value="newestFirst">Newest First</option>
-              <option value="oldestFirst">Oldest First</option>
-              <option value="az">A-Z</option>
-              <option value="za">Z-A</option>
-              <option value="completedFirst">Completed First</option>
-              <option value="incompleteFirst">Incomplete First</option>
+              <option className="sort-choice" value="newestFirst">Newest First</option>
+              <option className="sort-choice" value="oldestFirst">Oldest First</option>
+              <option className="sort-choice" value="az">A-Z</option>
+              <option className="sort-choice" value="za">Z-A</option>
+              <option className="sort-choice" value="completedFirst">Completed First</option>
+              <option className="sort-choice" value="incompleteFirst">Incomplete First</option>
             </select>
         </div>
       </nav>
